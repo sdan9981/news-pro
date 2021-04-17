@@ -182,7 +182,14 @@ var _default =
     this.navbarHeight = menuButtonInfo.bottom - info.statusBarHeight + (menuButtonInfo.top - info.statusBarHeight);
     this.windowWidth = menuButtonInfo.left;
 
-  } };exports.default = _default;
+  },
+  methods: {
+    open: function open() {
+      //此api表示保留当前页面，跳转到某一页面
+      uni.navigateTo({
+        url: "/pages/home-search/home-search" });
+
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -4,7 +4,7 @@
 			<!-- 状态栏 -->
 			<view :style="{height: statusBarHeight + 'px'}"></view>
 			<!-- 导航栏内容 -->
-			<view class="navbar-content" :style="{height:navbarHeight+'px',width:windowWidth +'px'}">
+			<view class="navbar-content" :style="{height:navbarHeight+'px',width:windowWidth +'px'}" @click="open">
 				<view class="navbar-search">
 					<view class="navbar-search-icon">	
 						<uni-icons type="search" size="16" color="#707070"></uni-icons>
@@ -43,6 +43,14 @@
 			this.navbarHeight = (menuButtonInfo.bottom - info.statusBarHeight) +(menuButtonInfo.top - info.statusBarHeight);
 			this.windowWidth = menuButtonInfo.left
 			// #endif
+		},
+		methods:{
+			open(){
+				//此api表示保留当前页面，跳转到某一页面
+				uni.navigateTo({
+					url:"/pages/home-search/home-search"
+				})
+			}
 		}
 	}
 </script>

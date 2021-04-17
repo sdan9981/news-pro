@@ -80,7 +80,7 @@ var components
 try {
   components = {
     likes: function() {
-      return __webpack_require__.e(/*! import() | components/likes/likes */ "components/likes/likes").then(__webpack_require__.bind(null, /*! @/components/likes/likes.vue */ 107))
+      return __webpack_require__.e(/*! import() | components/likes/likes */ "components/likes/likes").then(__webpack_require__.bind(null, /*! @/components/likes/likes.vue */ 98))
     }
   }
 } catch (e) {
