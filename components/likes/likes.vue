@@ -16,7 +16,7 @@
 		},
 		methods:{
 			likeTab(){
-				console.log("收藏成功")
+				console.log("�ղسɹ�")
 			}
 		}
 	}
