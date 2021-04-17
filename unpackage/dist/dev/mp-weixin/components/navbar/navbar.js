@@ -159,14 +159,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   name: "navbar",
+  props: {
+    isSerach: {
+      type: Boolean,
+      default: false } },
+
+
   data: function data() {
     return {
-      "statusBarHeight": 20,
-      "navbarHeight": 45,
-      "windowWidth": 375 };
+      statusBarHeight: 20,
+      navbarHeight: 45,
+      windowWidth: 375,
+      val: '' };
 
   },
   created: function created() {
@@ -179,16 +195,22 @@ var _default =
     //获取胶囊的位置
     var menuButtonInfo = uni.getMenuButtonBoundingClientRect();
     //（胶囊底部高度 - 状态栏高度） + （胶囊顶部高度 - 状态栏高度)
-    this.navbarHeight = menuButtonInfo.bottom - info.statusBarHeight + (menuButtonInfo.top - info.statusBarHeight);
+    this.navbarHeight = menuButtonInfo.bottom - info.statusBarHeight + (menuButtonInfo.top - info.
+    statusBarHeight);
     this.windowWidth = menuButtonInfo.left;
 
   },
   methods: {
     open: function open() {
+      if (this.isSerach) return;
       //此api表示保留当前页面，跳转到某一页面
       uni.navigateTo({
         url: "/pages/home-search/home-search" });
 
+    },
+    inputChange: function inputChange(e) {var
+      value = e.detail.value;
+      this.$emit('input', value);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
