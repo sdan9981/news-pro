@@ -109,6 +109,7 @@
 					}
 
 					.navbar-search-content {
+						width: 100%;
 						font-size: 14px;
 						color: #999999;
 					}
