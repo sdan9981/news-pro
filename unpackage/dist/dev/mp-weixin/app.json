@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/home-search/home-search",
+    "pages/home-detial/home-detial",
     "pages/tabbar/index/index",
+    "pages/home-label/home-label",
+    "pages/home-search/home-search",
     "pages/tabbar/follow/follow",
     "pages/tabbar/my/my"
   ],
@@ -37,6 +39,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

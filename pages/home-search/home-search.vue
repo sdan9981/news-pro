@@ -1,14 +1,15 @@
 <template>
 	<view class="home">
-		<navbar :isSerach="true" @input="change"></navbar>
+		<navbar :isSerach="true" v-model="value" @input="change"></navbar>
 		<view class="home-list">
 			<view class="label-box" v-if="history">
 				<view class="label-header">
 					<text class="label-title">搜索历史</text>
-					<text class="label-clear">清空</text>
+					<text class="label-clear" @click="clear">清空</text>
 				</view>
 				<view v-show="historyList.length > 0" class="label-content">
-					<view class="label-content__item" v-for="(item,index) in historyList" :key="index">
+					<view class="label-content__item" v-for="(item,index) in historyList" :key="index"
+						@click="openHistory(item)">
 						{{item.name}}
 					</view>
 				</view>
@@ -17,7 +18,13 @@
 				</view>
 			</view>
 			<list-scroll v-else class="list-scroll">
-				<list-card :item="item" @click="setHistory" v-for="item in searchList" :key="item._id"></list-card>
+				<uni-load-more v-if="loading" status="loading" iconType="snow"></uni-load-more>
+				<view v-if="searchList.length > 0">
+					<list-card :item="item" @click="setHistory" v-for="item in searchList" :key="item._id"></list-card>
+				</view>
+				<view v-if="searchList.length === 0 && !loading" class="no-data">
+					没有搜索到相关数据
+				</view>
 			</list-scroll>
 		</view>
 	</view>
@@ -32,22 +39,27 @@
 			return {
 				value: '',
 				history: true,
-				searchList: []
+				searchList: [],
+				loading: false
 			}
 		},
 		computed: {
 			...mapState(['historyList'])
 		},
 		methods: {
+			openHistory(item) {
+				this.value = item.name
+				this.getSearch(this.value)
+			},
 			setHistory() {
-				this.$store.dispatch('set_history',{
-					name:this.value
+				this.$store.dispatch('set_history', {
+					name: this.value
 				})
 			},
 			change(value) {
-				this.value = value
 				if (!value) {
 					clearTimeout(this.timer);
+					this.mark = false
 					this.getSearch(value)
 					return
 				}
@@ -72,13 +84,23 @@
 					return
 				}
 				this.history = false
+				this.loading = true
 				this.$api.get_search({
 					value: value
 				}).then(res => {
 					const {
 						data
 					} = res;
+					this.loading = false
 					this.searchList = data
+				}).catch(()=>{
+					this.loading = false
+				})
+			},
+			clear(){
+				this.$store.dispatch('clearHistory')
+				uni.showToast({
+					title:'清空完成'
 				})
 			}
 		}
@@ -96,8 +118,6 @@
 		display: flex;
 		flex-direction: column;
 		flex: 1;
-		border: 1px solid #ef0000;
-
 		.label-box {
 			background-color: $uni-bg-color;
 			margin-bottom: 10px;

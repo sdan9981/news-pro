@@ -80,7 +80,7 @@ var components
 try {
   components = {
     uniIcons: function() {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 74))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 88))
     }
   }
 } catch (e) {
@@ -172,6 +172,10 @@ var _default =
 {
   name: "navbar",
   props: {
+    value: {
+      type: [String, Number],
+      default: '' },
+
     isSerach: {
       type: Boolean,
       default: false } },
@@ -185,6 +189,11 @@ var _default =
       val: '' };
 
   },
+  watch: {
+    value: function value(newVal) {
+      this.val = newVal;
+    } },
+
   created: function created() {
     //获取手机系统信息
     var info = uni.getSystemInfoSync();
@@ -201,6 +210,12 @@ var _default =
 
   },
   methods: {
+    back: function back() {
+      // uni.navigateBack({})
+      uni.switchTab({
+        url: "/pages/tabbar/index/index" });
+
+    },
     open: function open() {
       if (this.isSerach) return;
       //此api表示保留当前页面，跳转到某一页面

@@ -34,7 +34,8 @@
 					<likes :item="item"></likes>
 				</view>
 				<view class="list-card-image">
-					<view v-if="index < 3" v-for="(item,index) in item.cover" :key="item._id" class="list-card-image__item">
+					<view v-if="index < 3" v-for="(item,index) in item.cover" :key="item._id"
+						class="list-card-image__item">
 						<image :src="item" mode="aspectFill"></image>
 					</view>
 				</view>
@@ -79,76 +80,95 @@
 
 <script>
 	export default {
-		name:"list-card",
-		props:{
-			item:{
-				type:Object,
-				default(){
+		name: "list-card",
+		props: {
+			item: {
+				type: Object,
+				default () {
 					return {}
 				}
 			}
 		},
 		data() {
 			return {
-				
+
 			};
 		},
-		methods:{
-			open(){
-				this.$emit('click',this.item)
-				console.log("打开详情页面")
+		methods: {
+			open() {
+				const item = this.item
+				this.$emit('click', item)
+				console.log(this.item)
+				const params = {
+					_id: item._id,
+					title: item.title,
+					create_time: item.create_time,
+					thumbs_up_count: item.thumbs_up_count,
+					browse_count: item.browse_count
+				}
+				uni.navigateTo({
+					url: '/pages/home-detial/home-detial'
+				})
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	.list-card{
+	.list-card {
 		display: flex;
 		padding: 10px;
 		margin: 10px;
 		border-radius: 5px;
 		box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.1);
 		box-sizing: border-box;
-		.list-card-image{
+
+		.list-card-image {
 			flex-shrink: 0;
 			width: 60px;
 			height: 60px;
 			border-radius: 5px;
 			overflow: hidden;
-			image{
+
+			image {
 				width: 100%;
 				height: 100%;
 			}
 		}
-		.list-card-content{
+
+		.list-card-content {
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
 			padding-left: 10px;
 			width: 100%;
-			.listcard-content-title{
+
+			.listcard-content-title {
 				position: relative;
 				padding-right: 30px;
 				font-size: 14px;
 				color: #333333;
 				font-weight: 400;
 				line-height: 1.2;
-				text{
+
+				text {
 					overflow: hidden;
 					text-overflow: ellipsis;
 					display: -webkit-box;
-					-webkit-box-orient:vertical;
-					-webkit-line-clamp:2
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 2
 				}
 			}
-			.listcard-content-des{
+
+			.listcard-content-des {
 				display: flex;
 				justify-content: space-between;
 				font-size: 12px;
-				.listcard-content-des-label{
+
+				.listcard-content-des-label {
 					display: flex;
-					.listcard-content-des-label-item{
+
+					.listcard-content-des-label-item {
 						padding: 0 5px;
 						margin-right: 5px;
 						border-radius: 15px;
@@ -156,50 +176,61 @@
 						border: 1px solid $mk-base-color;
 					}
 				}
-				.listcard-content-des-browse{
+
+				.listcard-content-des-browse {
 					color: #999999;
 					line-height: 1.5;
 				}
 			}
 		}
-		&.mode-column{
-			.list-card-content{
+
+		&.mode-column {
+			.list-card-content {
 				width: 100%;
 				padding-left: 0;
 			}
-			.list-card-image{
+
+			.list-card-image {
 				display: flex;
 				margin-top: 10px;
 				width: 100%;
 				height: 70px;
-				.list-card-image__item{
+
+				.list-card-image__item {
 					margin-left: 10px;
 					width: 100%;
 					border-radius: 5px;
 					overflow: hidden;
-					&:first-child{
+
+					&:first-child {
 						margin-left: 0;
 					}
-					image{
+
+					image {
 						width: 100%;
 						height: 100%;
 					}
 				}
 			}
-			.listcard-content-des{
+
+			.listcard-content-des {
 				margin-top: 10px;
 			}
 		}
-		&.mode-image{
+
+		&.mode-image {
 			flex-direction: column;
-			.list-card-image{
+
+			.list-card-image {
 				width: 100%;
 				height: 100px;
 			}
-			.list-card-content{
+
+			.list-card-content {
 				padding-left: 0;
 				margin-top: 10px;
-				.listcard-content-des{
+
+				.listcard-content-des {
 					display: flex;
 					align-items: center;
 					margin-top: 10px;

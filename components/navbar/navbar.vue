@@ -6,8 +6,8 @@
 			<!-- 导航栏内容 -->
 			<view class="navbar-content" :class="{search:isSerach}"
 				:style="{height:navbarHeight+'px',width:windowWidth +'px'}" @click.stop="open">
-				<view class="navbar-content__search-icons">
-					<uni-icons type="back" size="22" color="#ffffff"></uni-icons>
+				<view v-if="isSerach" class="navbar-content__search-icons">
+					<uni-icons type="back" size="22" color="#ffffff" @click="back"></uni-icons>
 				</view>
 				<!-- 不在搜索页 -->
 				<view v-if="!isSerach" class="navbar-search">
@@ -33,6 +33,10 @@
 	export default {
 		name: "navbar",
 		props: {
+			value:{
+				type:[String,Number],
+				default:''
+			},
 			isSerach: {
 				type: Boolean,
 				default: false
@@ -45,6 +49,11 @@
 				windowWidth: 375,
 				val: ''
 			};
+		},
+		watch:{
+			value(newVal){
+				this.val = newVal
+			}
 		},
 		created() {
 			//获取手机系统信息
@@ -62,6 +71,12 @@
 			// #endif
 		},
 		methods: {
+			back(){
+				// uni.navigateBack({})
+				uni.switchTab({
+					url:"/pages/tabbar/index/index"
+				})
+			},
 			open() {
 				if (this.isSerach) return
 				//此api表示保留当前页面，跳转到某一页面

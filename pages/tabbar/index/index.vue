@@ -18,30 +18,39 @@
 		data() {
 			return {
 				title: 'Hello',
-				tabList:[],
-				tabIndex:0,
-				activeIndex:0
+				tabList: [],
+				tabIndex: 0,
+				activeIndex: 0
 			}
 		},
 		onLoad() {
+			uni.$on('labelChange', (res) => {
+				this.tabList = []
+				this.tabIndex = 0
+				this.activeIndex = 0
+				this.getLabel();
+			})
 			this.getLabel();
 		},
 		methods: {
-			change(current){
+			change(current) {
 				this.tabIndex = current
 				this.activeIndex = current
 			},
-			tab({data,index}){
+			tab({
+				data,
+				index
+			}) {
 				this.activeIndex = index
 			},
 			//调用云函数方法
-			getLabel(){
-				this.$api.get_label({
-					name:'get_label'
-				}).then((res)=>{
-					const {data} = res;
+			getLabel() {
+				this.$api.get_label().then((res) => {
+					const {
+						data
+					} = res;
 					data.unshift({
-						name:'全部'
+						name: '全部'
 					})
 					this.tabList = data
 				})
@@ -51,15 +60,17 @@
 </script>
 
 <style lang="scss">
-	page{
+	page {
 		height: 100%;
 		display: flex;
 	}
-	.home{
+
+	.home {
 		display: flex;
 		flex-direction: column;
 		flex: 1;
-		.home-list{
+
+		.home-list {
 			flex: 1;
 			box-sizing: border-box;
 		}

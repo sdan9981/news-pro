@@ -99,10 +99,10 @@ try {
       return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 53))
     },
     tab: function() {
-      return __webpack_require__.e(/*! import() | components/tab/tab */ "components/tab/tab").then(__webpack_require__.bind(null, /*! @/components/tab/tab.vue */ 60))
+      return __webpack_require__.e(/*! import() | components/tab/tab */ "components/tab/tab").then(__webpack_require__.bind(null, /*! @/components/tab/tab.vue */ 74))
     },
     list: function() {
-      return __webpack_require__.e(/*! import() | components/list/list */ "components/list/list").then(__webpack_require__.bind(null, /*! @/components/list/list.vue */ 67))
+      return __webpack_require__.e(/*! import() | components/list/list */ "components/list/list").then(__webpack_require__.bind(null, /*! @/components/list/list.vue */ 81))
     }
   }
 } catch (e) {
@@ -159,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -184,7 +184,13 @@ var _default = {
       activeIndex: 0 };
 
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {var _this = this;
+    uni.$on('labelChange', function (res) {
+      _this.tabList = [];
+      _this.tabIndex = 0;
+      _this.activeIndex = 0;
+      _this.getLabel();
+    });
     this.getLabel();
   },
   methods: {
@@ -192,21 +198,25 @@ var _default = {
       this.tabIndex = current;
       this.activeIndex = current;
     },
-    tab: function tab(_ref) {var data = _ref.data,index = _ref.index;
+    tab: function tab(_ref)
+
+
+    {var data = _ref.data,index = _ref.index;
       this.activeIndex = index;
     },
     //调用云函数方法
-    getLabel: function getLabel() {var _this = this;
-      this.$api.get_label({
-        name: 'get_label' }).
-      then(function (res) {var
-        data = res.data;
+    getLabel: function getLabel() {var _this2 = this;
+      this.$api.get_label().then(function (res) {var
+
+        data =
+        res.data;
         data.unshift({
           name: '全部' });
 
-        _this.tabList = data;
+        _this2.tabList = data;
       });
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

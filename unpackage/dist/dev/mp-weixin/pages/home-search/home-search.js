@@ -99,10 +99,13 @@ try {
       return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 53))
     },
     listScroll: function() {
-      return __webpack_require__.e(/*! import() | components/list-scroll/list-scroll */ "components/list-scroll/list-scroll").then(__webpack_require__.bind(null, /*! @/components/list-scroll/list-scroll.vue */ 87))
+      return __webpack_require__.e(/*! import() | components/list-scroll/list-scroll */ "components/list-scroll/list-scroll").then(__webpack_require__.bind(null, /*! @/components/list-scroll/list-scroll.vue */ 60))
+    },
+    uniLoadMore: function() {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-load-more/components/uni-load-more/uni-load-more */ "uni_modules/uni-load-more/components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue */ 108))
     },
     listCard: function() {
-      return __webpack_require__.e(/*! import() | components/list-card/list-card */ "components/list-card/list-card").then(__webpack_require__.bind(null, /*! @/components/list-card/list-card.vue */ 94))
+      return __webpack_require__.e(/*! import() | components/list-card/list-card */ "components/list-card/list-card").then(__webpack_require__.bind(null, /*! @/components/list-card/list-card.vue */ 67))
     }
   }
 } catch (e) {
@@ -159,7 +162,14 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
 
 
 
@@ -193,22 +203,27 @@ var _vuex = __webpack_require__(/*! vuex */ 24);function ownKeys(object, enumera
     return {
       value: '',
       history: true,
-      searchList: [] };
+      searchList: [],
+      loading: false };
 
   },
   computed: _objectSpread({},
   (0, _vuex.mapState)(['historyList'])),
 
   methods: {
+    openHistory: function openHistory(item) {
+      this.value = item.name;
+      this.getSearch(this.value);
+    },
     setHistory: function setHistory() {
       this.$store.dispatch('set_history', {
         name: this.value });
 
     },
     change: function change(value) {var _this = this;
-      this.value = value;
       if (!value) {
         clearTimeout(this.timer);
+        this.mark = false;
         this.getSearch(value);
         return;
       }
@@ -233,15 +248,26 @@ var _vuex = __webpack_require__(/*! vuex */ 24);function ownKeys(object, enumera
         return;
       }
       this.history = false;
+      this.loading = true;
       this.$api.get_search({
         value: value }).
       then(function (res) {var
 
         data =
         res.data;
+        _this2.loading = false;
         _this2.searchList = data;
+      }).catch(function () {
+        _this2.loading = false;
       });
+    },
+    clear: function clear() {
+      this.$store.dispatch('clearHistory');
+      uni.showToast({
+        title: '清空完成' });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

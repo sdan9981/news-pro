@@ -28,3 +28,10 @@ export const get_search = (data)=>{
 		data
 	})
 }
+// 编辑标签
+export const update_label = (data)=>{
+	return $http({
+		url:'update_label',
+		data
+	})
+}
