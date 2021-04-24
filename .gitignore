@@ -1,2 +1,5 @@
 manifest.json
 uniCloud-aliyun/cloudfunctions/get_list/get_list.param.json
+.project
+unpackage/
+.DS_Store

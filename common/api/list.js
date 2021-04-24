@@ -35,3 +35,11 @@ export const update_label = (data)=>{
 		data
 	})
 }
+
+//获取文章详情
+export const get_detial = (data)=>{
+	return $http({
+		url:'get_detial',
+		data
+	})
+}

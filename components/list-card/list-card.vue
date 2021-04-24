@@ -98,16 +98,18 @@
 			open() {
 				const item = this.item
 				this.$emit('click', item)
-				console.log(this.item)
+				// console.log(this.item)
 				const params = {
 					_id: item._id,
 					title: item.title,
+					author: item.author,
 					create_time: item.create_time,
 					thumbs_up_count: item.thumbs_up_count,
 					browse_count: item.browse_count
 				}
+				//传参注意长度,太长 h5 url可能会被截断
 				uni.navigateTo({
-					url: '/pages/home-detial/home-detial'
+					url: '/pages/home-detial/home-detial?params=' + JSON.stringify(params)
 				})
 			}
 		}
