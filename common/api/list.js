@@ -43,3 +43,11 @@ export const get_detial = (data)=>{
 		data
 	})
 }
+
+//获取用户信息
+export const get_user = (data)=>{
+	return $http({
+		url:'get_user',
+		data
+	})
+}
