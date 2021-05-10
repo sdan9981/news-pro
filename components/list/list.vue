@@ -46,6 +46,11 @@
 		created() {
 			//TODO tab还没有赋值
 			// this.getList(0)
+			uni.$on('undate_article',()=>{
+				this.listCatchData = {}
+				this.load = {}
+				this.getList(this.activeIndex)
+			})
 		},
 		methods:{
 			loadmore(){

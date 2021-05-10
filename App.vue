@@ -3,7 +3,7 @@
 		onLaunch: function() {
 			//正常情况是后台提供一个登录接口或者标识，我们再用这个接口去操作
 			this.$api.get_user({
-				user_id:"60726b2e1a30730001d7765e"
+				user_id:"60726b2e1a30730001d7765f"
 			}).then(res=>{
 				const {data} = res
 				this.$store.dispatch('set_userinfo',data)

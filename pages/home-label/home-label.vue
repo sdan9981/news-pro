@@ -27,7 +27,7 @@
 					{{item.name}}
 				</view>
 				<view v-if="list.length === 0 && !loading" class="no-data">
-					当前没有数据
+					当前没有数据...
 				</view>
 			</view>
 		</view>

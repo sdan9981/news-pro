@@ -48,7 +48,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/detial-comments/detial-comments",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

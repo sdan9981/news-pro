@@ -51,3 +51,35 @@ export const get_user = (data)=>{
 		data
 	})
 }
+
+//提交评论
+export const update_comment = (data)=>{
+	return $http({
+		url:'update_comment',
+		data
+	})
+}
+
+//获取评论列表
+export const get_comments = (data)=>{
+	return $http({
+		url:'get_comments',
+		data
+	})
+}
+
+//关注作者
+export const update_author = (data)=>{
+	return $http({
+		url:'update_author',
+		data
+	})
+}
+
+//点赞
+export const update_thumbsup = (data)=>{
+	return $http({
+		url:'update_thumbsup',
+		data
+	})
+}
